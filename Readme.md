@@ -51,30 +51,27 @@ Running the exercises this way will make use of the `--watch` functionality of j
 # This part is for the teachers
 In this forked repo from https://github.com/Codaisseur/dataTransFormationExercises there are some changes:
 
-1. [Package.json] (https://github.com/kerenKi/dataTransFormationExercises/blob/master/package.json)
-
+1.[Package.json](https://github.com/kerenKi/dataTransFormationExercises/blob/master/package.json)
 The script for jest includes a default reporter coming from the root directory
 
-2. [customSequencer.js](https://github.com/kerenKi/dataTransFormationExercises/blob/master/customSequencer.js)
-
+2.[customSequencer.js](https://github.com/kerenKi/dataTransFormationExercises/blob/master/customSequencer.js)
 Make sure the tests are running in by order
 
 3.[customReporter.js](https://github.com/kerenKi/dataTransFormationExercises/blob/master/customReporter.js)
-
 The reporter tracks changes in the tests. the first time the student will run the tests there will be no record of it.
 After the student makes a change in the files and run the tests again the reporter will start sending reports to Heroku database every time the tests run.
 
 More details about the customReporter:
 
--The variable *createKey* takes the name of the test and adds a key, based on the alphabet.
+- The variable *createKey* takes the name of the test and adds a key, based on the alphabet.
 
--The variable *createReport* checks per test (question) if the student attempted, failed or passed. ancestorTitles refer to the test file where it uses describe. E.g. 'Array methods: map, filter & find'
+- The variable *createReport* checks per test (question) if the student attempted, failed or passed. ancestorTitles refer to the test file where it uses describe. E.g. 'Array methods: map, filter & find'
 
--The variable *getDayNameAndVersion: name* refers to the name of the whole day, e.g. dataTransformations and version refers to the version in the package.json, e.g. 1.0.0
+- The variable *getDayNameAndVersion: name* refers to the name of the whole day, e.g. dataTransformations and version refers to the version in the package.json, e.g. 1.0.0
 
--The variable *getGitDetails* - don't confuse the gitName with your gitUsername. The gitName is the one you created once on your own computer. It could be the same but it could be different.
+- The variable *getGitDetails* - don't confuse the gitName with your gitUsername. The gitName is the one you created once on your own computer. It could be the same but it could be different.
 
--The variable *output* posts all data to the database using the axios post request to /evaluations.
+- The variable *output* posts all data to the database using the axios post request to /evaluations.
 
 Example of data output:
 ```
