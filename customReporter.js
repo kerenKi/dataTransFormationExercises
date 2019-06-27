@@ -14,7 +14,7 @@ const createKey = (test, index) => {
 }
 
 const createReport = (test, index) => {
-    // console.log('test object:', test)
+    console.log('test object:', test)
     if(!test) return {}
     return {
         exercise: test.ancestorTitles[0],
@@ -82,8 +82,8 @@ class MyCustomReporter {
             .map(createReport)
 
         // CONSOLE.LOGS FOR DEBUGGING
-        // console.log('suiteResults:', suiteResults)
-        // console.log('testReports:', testReports)
+        console.log('suiteResults:', suiteResults)
+        console.log('testReports:', testReports)
         // console.log('testResults.testResults:', testReports.testResults)
 
         const output = {
@@ -96,7 +96,7 @@ class MyCustomReporter {
             evaluation: testReports
         }
 
-        // console.log('output:', output)
+        console.log('output:', output)
 
         //Sending the raw data to the db  
         axios.post(`${baseUrl}/raw_data`, output )
