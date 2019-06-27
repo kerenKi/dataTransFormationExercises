@@ -57,7 +57,7 @@ The script for jest includes a default reporter coming from the root directory
 
 2. [customSequencer.js](https://github.com/kerenKi/dataTransFormationExercises/blob/master/customSequencer.js)
 
-Make sure the tests are running in by order
+Make sure the tests are running by order
 
 3. [customReporter.js](https://github.com/kerenKi/dataTransFormationExercises/blob/master/customReporter.js)
 
@@ -66,15 +66,15 @@ After the student makes a change in the files and run the tests again the report
 
 More details about the customReporter:
 
-- The variable *createKey* takes the name of the test and adds a key, based on the alphabet.
+- The variable `createKey` takes the name of the test and adds a key, based on the alphabet.
 
-- The variable *createReport* checks per test (question) if the student attempted, failed or passed. ancestorTitles refer to the test file where it uses describe. E.g. 'Array methods: map, filter & find'
+- The variable `createReport` checks per test (question) if the student attempted, failed or passed. ancestorTitles refer to the test file where it uses describe. E.g. 'Array methods: map, filter & find'
 
-- The variable *getDayNameAndVersion: name* refers to the name of the whole day, e.g. dataTransformations and version refers to the version in the package.json, e.g. 1.0.0
+- The variable `getDayNameAndVersion: name` refers to the name of the whole day, e.g. dataTransformations and version refers to the version in the package.json, e.g. 1.0.0
 
-- The variable *getGitDetails* - don't confuse the gitName with your gitUsername. The gitName is the one you created once on your own computer. It could be the same but it could be different.
+- The variable `getGitDetails` - don't confuse the gitName with your gitUsername. The gitName is the one you created once on your own computer. It could be the same but it could be different.
 
-- The variable *output* posts all data to the database using the axios post request to /evaluations.
+- The variable `output` posts all data to the database using the axios post request to /evaluations.
 
 Example of data output:
 ```
@@ -129,3 +129,21 @@ Example of data output:
         }
 
 ```
+
+### `other relevant repos`
+
+The teacher can see a dashboard with 4 charts displaying the students progress during the day:  
+
+front-end of the app is available [here](https://github.com/ajvanliere/Continuous-Testing-Client/).
+
+back-end of the app is available [here](https://github.com/rafaelrolivares/continuous-student-testing-server)
+
+
+## contributors
+This continuous testing project was developed by 
+- [Andrea Van Liere](https://github.com/ajvanliere)
+- [Keren Kinberg](https://github.com/kerenki)
+- [Rafael Olivares](https://github.com/rafaelrolivares)
+
+As three graduates of the Codaisseur Academy in Amsterdam we developed this tool with the help of Rein op ‘t Land and Kelley van Evert -  teachers and developers at Codaisseur. 
+
