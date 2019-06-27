@@ -26,7 +26,7 @@ The solutions to these exercises can be found on the [feature/solutions](https:/
 
 ```bash
 # Clone the repo
-git clone git@github.com:Codaisseur/dataTransFormationExercises.git
+git clone git@github.com:kerenKi/dataTransFormationExercises.git
 # change directory
 cd dataTransFormationExercises
 # Install dependencies

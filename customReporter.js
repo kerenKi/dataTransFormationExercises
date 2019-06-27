@@ -1,6 +1,10 @@
 const fs = require('fs')
 const gitconfig = require('gitconfig')
 const axios = require('axios')
+//Importing the baseUrl
+const setting = require('./settings')
+
+const { baseUrl } = setting
 
 const testAttempted = status => status === 'failed' || status === 'passed'
 const testPassed = status => status === 'passed'
@@ -26,7 +30,7 @@ const createReport = (test, index) => {
     }
 }
 
-const getExerciseNameAndVersion = () => {
+const getDayNameAndVersion = () => {
     const { name, version } = JSON.parse(fs.readFileSync('./package.json'))
     return `${name}@${version}`
 }
@@ -34,11 +38,11 @@ const getExerciseNameAndVersion = () => {
 const getGitDetails = async () => {
     try {
         let config = await gitconfig.get({ location: 'global'})
-        const git_name = (config.user || {}).name || null
-        const git_email = (config.user || {}).email || null
-        return { git_name, git_email }
+        const gitName = (config.user || {}).name || null
+        const gitEmail = (config.user || {}).email || null
+        return { gitName, gitEmail }
     } catch(err){
-        return { git_name: null, git_email: null }
+        return { gitName: null, gitEmail: null }
     }
 }
 
@@ -66,8 +70,8 @@ class MyCustomReporter {
         // console.log('Contexts:', contexts)
         // console.log('Results:', results)
 
-        const exercise = getExerciseNameAndVersion()
-        const { git_name, git_email} = await getGitDetails()
+        const exercise = getDayNameAndVersion()
+        const { gitName, gitEmail} = await getGitDetails()
 
         let score = 0
         const testReports = suiteResults.testResults.flat()
@@ -77,7 +81,7 @@ class MyCustomReporter {
             }).flat()
             .map(createReport)
 
-
+        // CONSOLE.LOGS FOR DEBUGGING
         // console.log('suiteResults:', suiteResults)
         // console.log('testReports:', testReports)
         // console.log('testResults.testResults:', testReports.testResults)
@@ -87,15 +91,15 @@ class MyCustomReporter {
             day: exercise,
             context: '(unknown)',
             input: '(unknown)',
-            git_name,
-            git_email,
+            gitName,
+            gitEmail,
             evaluation: testReports
         }
 
-        console.log('output:', output)
+        // console.log('output:', output)
 
         //Sending the raw data to the db  
-        axios.post('http://localhost:4000/raw_data', output )
+        axios.post(`${baseUrl}/raw_data`, output )
           .then(function (response) {
             console.log(response.data.message);
           })
@@ -103,13 +107,14 @@ class MyCustomReporter {
             console.log(error);
           });
 
+        // test data for easy testing the post /evaluations request  
         const testOutput = {
-            day:'data-transformations@1.0.0',
-            gitName:'kerenKi',
-            gitEmail:'kkinberg13@gmail.com',
+            day:'data-transformations@1.2.0',
+            gitName:'Andrea',
+            gitEmail:'Andrea@gmail.com',
             evaluation:[
                          {
-                            exercise: 'Array methods: map, filter & find: ',
+                            exercise: 'Array methods: map, filter & find: 1.1 ',
                             attempted: true,
                             passed: true,
                             key:
@@ -118,17 +123,44 @@ class MyCustomReporter {
                             meta: { learning_goals: [Array] } 
                         },
                         { 
-                            exercise: 'Array methods: map, filter & find: ',
+                            exercise: 'Array methods: map, filter & find: 1.1 ',
                             attempted: true,
                             passed: true,
                             key: '[B] getPokemonById: Gets a pokemon object by their id',
                             failureMessages: [],
                             meta: { learning_goals: [Array] } 
-                        }
+                        },
+                        { 
+                            exercise: 'Array methods: reduce: 1.1',
+                            attempted: true,
+                            passed: true,
+                            key:
+                            '[C] calculateTotalEggDistance: calculates how for you have to walk to hatch one of each pokemon egg',
+                            failureMessages: [],
+                            meta: [Object] 
+                        },
+                        { 
+                            exercise: 'Array methods: reduce:',
+                            attempted: true,
+                            passed: false,
+                            key:
+                                '[D] getHeaviestPokemon: returns the heaviest pokemon from an array of pokemons',
+                            failureMessages: [],
+                            meta: [Object] 
+                        },
+                        { 
+                            exercise: 'Array methods: map, filter & find: ',
+                            attempted: false,
+                            passed: false,
+                            key:
+                                '[E] getAdultPokemons: Transforms an array of pokemon into an array of pokemon who cannot be found in eggs',
+                            failureMessages: [],
+                            meta: [Object] },
                     ]
         }
 
-          axios.post('http://localhost:4000/evaluations', testOutput )
+        
+          axios.post(`${baseUrl}/evaluations`, output )
           .then(function (response) {
             console.log(response.data);
           })
@@ -163,8 +195,8 @@ class MyCustomReporter {
 //     "exercise": "data-transformations@1.0.0",
 //     "context": "(unknown)",
 //     "input": "(unknown)",
-//     "git_name": "Kelley van Evert",
-//     "git_email": "hello@kelleyvanevert.nl",
+//     "gitName": "Kelley van Evert",
+//     "gitEmail": "hello@kelleyvanevert.nl",
 //     "evaluation": [
 //       {
 //         "key": "ROOT",
