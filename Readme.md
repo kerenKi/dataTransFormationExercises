@@ -51,13 +51,16 @@ Running the exercises this way will make use of the `--watch` functionality of j
 # This part is for the teachers
 In this forked repo from https://github.com/Codaisseur/dataTransFormationExercises there are some changes:
 
-1. **Package.json**
-the script for jest includes a default reporter coming from the root directory
+1. [Package.json] (https://github.com/kerenKi/dataTransFormationExercises/blob/master/package.json)
 
-2. **customSequencer.js**
+The script for jest includes a default reporter coming from the root directory
+
+2. [customSequencer.js](https://github.com/kerenKi/dataTransFormationExercises/blob/master/customSequencer.js)
+
 Make sure the tests are running in by order
 
-3.**customReporter.js**
+3.[customReporter.js](https://github.com/kerenKi/dataTransFormationExercises/blob/master/customReporter.js)
+
 The reporter tracks changes in the tests. the first time the student will run the tests there will be no record of it.
 After the student makes a change in the files and run the tests again the reporter will start sending reports to Heroku database every time the tests run.
 
