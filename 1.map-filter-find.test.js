@@ -9,7 +9,7 @@ describe('Array methods: map, filter & find: ', () => {
         expect(pokemonNames[pokemonNames.length - 1]).toBe('Mew')
     });
 
-    test.skip('getPokemonById: Gets a pokemon object by their id', () => {
+    test('getPokemonById: Gets a pokemon object by their id', () => {
         console.log('oh hi')
         const id = 25
         const pokemon = getPokemonById(pokemons, id)
@@ -39,7 +39,7 @@ describe('Array methods: map, filter & find: ', () => {
         expect(adults.length).toBe(78)
         expect(adults.every(pokemon => pokemon.egg === "Not in Eggs")).toBe(true)
     })
-    
+
     test.skip('getPokemonImages: Transforms an array of pokemon into an array of imageUrls', () => {
         const imageUrls = getPokemonImages(pokemons)
     })

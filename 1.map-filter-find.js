@@ -3,7 +3,6 @@ const getPokeNames = (pokemons) => {
 }
 
 const getPokemonById = (pokemons, id) => {
-    return pokemons.find(pokemon => pokemon.id=== id)
 }
 
 module.exports = {
